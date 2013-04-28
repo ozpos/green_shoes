@@ -2,6 +2,7 @@ require 'rubygems'
 require 'rake'
 require 'rdoc/task'
 require 'rake/clean'
+require 'bundler'
 begin
   require 'jeweler'
 rescue LoadError
@@ -30,3 +31,11 @@ Rake::RDocTask.new do |t|
 end
 
 CLEAN.include [ 'pkg', '*.gem', 'doc' ]
+
+desc "Run abctest"
+task :abctest do
+  samples_dir = "samples"
+  cmd = RbConfig::CONFIG["host_os"] =~ /mswin/ ? 'swt-shoooes' : 'gshoes'
+  system "bin/#{cmd} #{samples_dir}/abctest.rb"
+end
+

@@ -21,11 +21,11 @@ class Shoes
         attr_accessor *args.keys
       end
 
-      (@width, @height = @real.size_request) if @real and !self.is_a?(TextBlock)
+      (@width, @height) = @real.size_request if @real and !self.is_a?(TextBlock)
 
       set_margin
-      @width += (@margin_left + @margin_right)
-      @height += (@margin_top + @margin_bottom)
+      @width -= (@margin_left + @margin_right)
+      @height -= (@margin_top + @margin_bottom)
 
       @proc = nil
       [:app, :real].each{|k| args.delete k}
@@ -103,11 +103,11 @@ class Shoes
     alias :clear_all :clear
 
     def positioning x, y, max
-      if parent.is_a?(Flow) and x + @width <= parent.left + parent.width
-        move3 x + parent.margin_left, max.top + parent.margin_top
+      if parent.is_a?(Flow) and x + @width <= parent.left + parent.width - parent.margin_right
+        move3 x, max.top
         max = self if max.height < @height
       else
-        move3 parent.left + parent.margin_left, max.top + max.height + parent.margin_top
+        move3 parent.left + parent.margin_left, max.top + max.height
         max = self
       end
       max
@@ -159,7 +159,7 @@ class Shoes
     end
 
     def rotate angle
-      (@real_orig, @first_time = @real, true) unless @real_orig
+      (@real_orig, @first_time) = @real, true unless @real_orig
       len = Math.sqrt @width**2 + @height**2
       surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, len, len
       context = Cairo::Context.new surface
@@ -428,6 +428,8 @@ class Shoes
       real.fraction = n
     end
 
-    undef_method :focus, :state, :state=
+    undef_method :focus
+    undef_method :state
+    undef_method :state=
   end
 end

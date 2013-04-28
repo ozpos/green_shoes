@@ -160,7 +160,7 @@ class Shoes
   end
 
   def self.contents_alignment slot
-    x, y = slot.left.to_i, slot.top.to_i
+    x, y = slot.left.to_i + slot.margin_left, slot.top.to_i + slot.margin_top
     max = Struct.new(:top, :height).new
     max.top, max.height = y, 0
     slot_height, slot_top = 0, y
@@ -182,7 +182,7 @@ class Shoes
         slot_height = max.top + max.height - slot_top
       end
     end
-    slot_height
+    slot_height + slot.margin_top + slot.margin_bottom
   end
 
   def self.repaint_all slot
