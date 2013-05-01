@@ -24,8 +24,8 @@ class Shoes
       (@width, @height) = @real.size_request if @real and !self.is_a?(TextBlock)
 
       set_margin
-      @width -= (@margin_left + @margin_right)
-      @height -= (@margin_top + @margin_bottom)
+      @width += (@margin_left + @margin_right)
+      @height += (@margin_top + @margin_bottom)
 
       @proc = nil
       [:app, :real].each{|k| args.delete k}
@@ -103,11 +103,12 @@ class Shoes
     alias :clear_all :clear
 
     def positioning x, y, max
-      if parent.is_a?(Flow) and x + @width <= parent.left + parent.width - parent.margin_right
-        move3 x, max.top
-        max = self if max.height < @height
+      if parent.is_a?(Flow) and fits_without_wrapping?(self, parent, x)
+        move3 x + margin_left, max.top
+        max = self if max.height < height
       else
-        move3 parent.left + parent.margin_left, max.top + max.height
+        move3 parent.left + parent.margin_left + margin_left, max.top + max.height + margin_top
+        y = max.top + max.height
         max = self
       end
       max
@@ -138,6 +139,19 @@ class Shoes
         @real.set_size_request @width, @height
         move @left, @top
       end
+    end
+
+    private
+    def right_align_position(element, parent, margin)
+      parent.left + parent.width - element.width - margin
+    end
+
+    def fits_without_wrapping?(element, parent, x)
+      x + element.width + element.margin_left + element.margin_right <= parent.left + parent.width - parent.margin_right
+    end
+
+    def bounds
+      gui_container ||= gui_container.getBounds
     end
   end
 

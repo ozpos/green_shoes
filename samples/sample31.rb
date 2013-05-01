@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app do
   strokewidth 3
   eles = []

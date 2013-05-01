@@ -1,7 +1,5 @@
 # Same snippet as http://shoes.heroku.com/manual/Events.html#motion{|left,top|...}
 
-require 'green_shoes'
-
 Shoes.app width: 200, height: 200 do
   background black
   fill white

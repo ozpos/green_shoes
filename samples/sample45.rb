@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app height: 200 do
   title 'Hello Green Shoes'
   font 'Coolvetica'

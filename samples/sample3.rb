@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app width: 300, height: 400 do
   fill rgb(0, 0.6, 0.9, 0.1)
   stroke rgb(0, 0.6, 0.9)

@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app width: 305, height: 460 do
   background lightskyblue
 
@@ -12,8 +10,8 @@ Shoes.app width: 305, height: 460 do
   end
 
   image File.join(DIR, '../static/gshoes-icon.png'), margin: 20, margin_left: 80
-  tagline fg(em(strong('A sample for margin style.')), maroon), 
-    margin: [30, 0, 0, 30]
+  tagline fg(em(strong('A sample for margin style.')), maroon),
+ margin: [30, 0, 0, 30]
 
   flow do
     background gold

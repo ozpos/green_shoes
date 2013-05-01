@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app do
   background deeppink
   title fg " Happy coding!", white

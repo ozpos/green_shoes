@@ -16,7 +16,7 @@ class Shoes
 
     app = App.new args
     @main_app ||= app
-    args.delete(:title)
+    #args.delete(:title)
 
     app.top_slot = Flow.new app.slot_attributes({app: app}.merge(args))
 

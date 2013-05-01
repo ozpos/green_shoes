@@ -1,8 +1,6 @@
 # This is a tiny flip book (aka Para-Para Manga in Japanese)
 # original is http://www.paraman.net/play/preview/1258
 # 
-require 'green_shoes'
-
 Shoes.app title: 'potacho', width: 175, height: 160 do
   background tan
   

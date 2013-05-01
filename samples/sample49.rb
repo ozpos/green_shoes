@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app do
   popup = proc{alert 'Testing style method...'}
 

@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app do
   flow width: 0.3, height: 0.5 do
     background lawngreen

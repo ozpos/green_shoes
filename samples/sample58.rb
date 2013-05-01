@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app width: 300, height: 100, title: 'Teeny-weeny Audio player' do
   space = ' '
   background gold..cyan, angle: 30

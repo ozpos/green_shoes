@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app do
   flow(width: 300){3.times{|i| button "hello#{i}"}}
   stack(width: 100){3.times{|i| button "hello#{i}"}}

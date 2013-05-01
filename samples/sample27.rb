@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app do
   button 'go' do
     p = para 0, top: 30

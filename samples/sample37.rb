@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app width: 330, height: 300do
   nofill
   rect 100, 20, 130, 251, stroke: red, fill: yellow

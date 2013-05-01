@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app do
   stack margin_left: 10 do
     title "Downloading Astronomy Picture of the Day",  size: 16

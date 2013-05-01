@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app width: 300, height: 300 do
   fname = File.join(DIR, '../static/gshoes-icon.png')
   background yellow..orange, angle: 90

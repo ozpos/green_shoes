@@ -1,5 +1,4 @@
 # original code is Red Shoes class-book.rb by _why
-require 'green_shoes'
 require 'yaml'
 
 class Book < Shoes

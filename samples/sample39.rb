@@ -1,7 +1,5 @@
 # An imitation of Hackety Hack opening demo.
 
-require 'green_shoes'
-
 Shoes.app width: 420, height: 420 do
   nostroke
   background black

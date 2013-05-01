@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 # The same as gallery2 : http://shoes-tutorial-note.heroku.com/html/01110_Fancy_Gallery_1-5.html
 # But revised for Green Shoes
 

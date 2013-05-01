@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app do
   10.times do |i|
     button "hello#{i}"

@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app do
   background chocolate..black, angle: 130
   strokewidth 20

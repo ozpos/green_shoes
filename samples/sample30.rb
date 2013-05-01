@@ -1,7 +1,5 @@
 # Almost same code as sample22.rb : http://shoes-tutorial-note.heroku.com/html/00508_The_Widget_class.html
 
-require 'green_shoes'
-
 class Answer < Shoes::Widget
   attr_reader :mark
   def initialize word

@@ -1,6 +1,6 @@
 # Hackety Hack with Green Shoes
-require '../lib/green_shoes'
-require './tabs_proc'
+#require '../lib/green_shoes'
+require_relative '../hh/tabs_proc'
 
 Shoes.app width: 480 do
   extend HH::TabsProc

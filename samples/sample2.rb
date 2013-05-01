@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app title: 'Green Shoes New Logo Icon!', width: 300, height: 420 do
   stack do
     path = File.join(DIR, '../static/gshoes-icon.png')

@@ -32,10 +32,25 @@ end
 
 CLEAN.include [ 'pkg', '*.gem', 'doc' ]
 
+desc "Run a sample"
+task :abclauncher do
+  samples_dir = "samples"
+  cmd = RbConfig::CONFIG["host_os"] =~ /mswin/ ? 'swt-shoooes' : 'gshoes'
+  system "bin/#{cmd} #{samples_dir}/abclauncher.rb"
+end
+
 desc "Run abctest"
 task :abctest do
   samples_dir = "samples"
   cmd = RbConfig::CONFIG["host_os"] =~ /mswin/ ? 'swt-shoooes' : 'gshoes'
   system "bin/#{cmd} #{samples_dir}/abctest.rb"
+end
+
+desc "Run HH"
+task :hh do
+  samples_dir = "lib"
+
+  cmd = RbConfig::CONFIG["host_os"] =~ /mswin/ ? 'swt-shoooes' : 'gshoes'
+  system "bin/#{cmd} #{samples_dir}/h-ety-h.rb"
 end
 

@@ -1,8 +1,6 @@
 # Original code was written by Cecil Coupe
 # He shared that in Shoes ML: http://librelist.com/browser//shoes/2011/2/17/radio-checked-method-broken/#1197b650c7dfdae2bc7c76bd9dad7e0e
 
-require 'green_shoes'
-
 Shoes.app width: 300, height: 300 do
   background gold..deeppink, angle: 45
   @opt = 'none'

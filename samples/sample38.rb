@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app width: 250, height: 250 do
   nofill
   animate do |i|

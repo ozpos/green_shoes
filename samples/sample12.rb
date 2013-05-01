@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app width: 300, height: 300 do
   background cadetblue
   r = rect 100, 10, 100, fill: red, strokewidth: 5, curve: 10, stroke: pink

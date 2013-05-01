@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app title: 'A Tiny Chipmunk Physics Demo' do
   extend ChipMunk
   space = cp_space

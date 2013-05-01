@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app width: 500, height: 100, title: 'Bloopsaphone Play Lists'do
   background mediumspringgreen..hotpink, angle: 90
   nostroke

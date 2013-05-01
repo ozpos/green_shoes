@@ -38,7 +38,7 @@ class Object
 
   def confirm msg
     $dde = true
-    dialog = Gtk::Dialog.new(
+    dialog = Gtk::MessageDialog.new(
       "Green Shoes asks:", 
       get_win,
       Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
@@ -55,7 +55,7 @@ class Object
 
   def ask msg, args={}
     $dde = true
-    dialog = Gtk::Dialog.new(
+    dialog = Gtk::MessageDialog.new(
       "Green Shoes asks:", 
       get_win,
       Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,

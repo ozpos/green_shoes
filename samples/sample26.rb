@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app width: 450, height: 150 do
   background black
   strokewidth 4

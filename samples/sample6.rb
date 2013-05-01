@@ -1,5 +1,3 @@
-require 'green_shoes'
-
 Shoes.app do
   stack do
     para DIR

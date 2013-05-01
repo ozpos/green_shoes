@@ -1,7 +1,5 @@
 # original code is http://shoes-tutorial-note.heroku.com/html/00409_No.9_Shoes.url.html
 
-require 'green_shoes'
-
 class PhotoFrame < Shoes
   url '/', :index
   url '/loogink', :loogink

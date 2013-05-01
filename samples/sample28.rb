@@ -1,6 +1,4 @@
 # The Game Snake. Refer to Gallery No.7: http://shoes-tutorial-note.heroku.com/html/01120_Fancy_Gallery_6-10.html
-require 'green_shoes'
-
 Shoes.app :title => 'Snake Game v0.1' do
   background black
 

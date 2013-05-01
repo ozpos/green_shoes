@@ -12,9 +12,6 @@ $config=[
 ENV.delete('proxy_http')
 
 ##__EEND__##################################################################################
-require 'green_shoes'
-#require 'green_shoes' 
-
 require 'tmpdir'
 require 'open-uri' 
 

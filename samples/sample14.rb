@@ -10,8 +10,6 @@
 # directions. As the circles move they change size and color. 
 #
 
-require 'green_shoes'
-
 degree = 0
 color = 0
 size = 0

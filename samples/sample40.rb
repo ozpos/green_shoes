@@ -1,6 +1,4 @@
 # For Christmas
-require 'green_shoes'
-
 Shoes.app width: 330, height: 300 do
   nostroke
   background black

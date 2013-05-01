@@ -1,4 +1,3 @@
-require 'green_shoes'
 # The original is Red Shoes built-in sample: expert-othello.rb
 # A little bit edited for Green Shoes.
 

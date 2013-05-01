@@ -81,7 +81,7 @@ class Shoes
       app.instance_variable_set :@_h, args[:height]
       def app.width; @_w end
       def app.height; @_h end
-      app.win = win
+      #app.win = win
 
       swin = Gtk::ScrolledWindow.new
       swin.set_size_request args[:width], args[:height]
