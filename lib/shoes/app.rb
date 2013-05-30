@@ -20,6 +20,7 @@ class Shoes
       end
       
       init_app_vars
+
       @canvas, @win, @swin, @top_slot = nil
       @cslot = (@app ||= self)
       @width_pre, @height_pre = @width, @height

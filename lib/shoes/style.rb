@@ -50,6 +50,7 @@ class Shoes
       
       clear false if @real
       @width = (@left + parent.width <= @app.width) ? parent.width : @app.width - @left
+      @width -= (margin_left + margin_right + parent.margin_left + parent.margin_right)
       @width = initials[:width] unless initials[:width].zero?
       @height = 20 if @height.zero?
       m = self.class.to_s.downcase[7..-1]

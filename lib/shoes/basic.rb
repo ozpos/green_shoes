@@ -25,6 +25,7 @@ class Shoes
 
       set_margin
       @width += (@margin_left + @margin_right)
+      set_minimum_width(self, @width)# + parent.margin_left + parent.margin_right)
       @height += (@margin_top + @margin_bottom)
 
       @proc = nil
@@ -43,7 +44,7 @@ class Shoes
     def move x, y
       @app.cslot.contents -= [self]
       @app.canvas.move @real, x, y unless @hided
-      move3 x, y
+      @left, @top = x, y
       self
     end
 
@@ -52,10 +53,6 @@ class Shoes
         remove
         @app.canvas.put @real, x, y
       end
-      move3 x, y
-    end
-
-    def move3 x, y
       @left, @top = x, y
     end
 
@@ -104,41 +101,19 @@ class Shoes
 
     def positioning x, y, max
       if parent.is_a?(Flow) and fits_without_wrapping?(self, parent, x)
-        move3 x + margin_left, max.top
+        @left, @top = x, max.top
         max = self if max.height < height
       else
-        move3 parent.left + parent.margin_left + margin_left, max.top + max.height + margin_top
-        y = max.top + max.height
+        @left, @top = parent.left + parent.margin_left, max.top + max.height #+ parent.margin_top
+        y = max.top + max.height #+ parent.margin_top
         max = self
       end
       max
     end
 
-    def fix_size
-      flag = false
-      set_margin
-      case self
-      when EditBox, Button
-        if 0 < @initials[:width] and @initials[:width] <= 1.0
-          @width = @parent.width * @initials[:width] - @margin_left - @margin_right
-          flag = true
-        end
-        if 0 < @initials[:height] and @initials[:height] <= 1.0
-          @height = @parent.height * @initials[:height] - @margin_top - @margin_bottom
-          flag = true
-        end
-      when EditLine, ListBox
-        if 0 < @initials[:width] and @initials[:width] <= 1.0
-          @width = @parent.width * @initials[:width] - @margin_left - @margin_right
-          @height = 26
-          flag = true
-        end
-      else
-      end
-      if flag
-        @real.set_size_request @width, @height
-        move @left, @top
-      end
+    def _move left, top
+      #@app.canvas.move @real, x, y unless @hided
+      @left, @top = left, top
     end
 
     private
@@ -147,7 +122,7 @@ class Shoes
     end
 
     def fits_without_wrapping?(element, parent, x)
-      x + element.width + element.margin_left + element.margin_right <= parent.left + parent.width - parent.margin_right
+      x + element.width <= parent.left + parent.width - parent.margin_right
     end
 
     def bounds
@@ -199,7 +174,7 @@ class Shoes
     def move2 x, y
       return if @hided
       clear if @real
-      @left, @top, @width, @height = parent.left, parent.top, parent.width, parent.height
+      @left, @top, @width, @height = parent.left+parent.margin_left, parent.top+parent.margin_top, parent.width - parent.margin_left - parent.margin_right, parent.height - parent.margin_top - parent.margin_bottom
       @width = @args[:width] unless @args[:width].zero?
       @height = @args[:height] unless @args[:height].zero?
       m = self.class.to_s.downcase[7..-1]
@@ -373,7 +348,7 @@ class Shoes
 
     def move2 x, y
       @app.canvas.move @real, x, y
-      move3 x, y
+      @left, @top = x, y
     end
 
     def change &blk
@@ -392,7 +367,7 @@ class Shoes
 
     def move2 x, y
       @app.canvas.move @real, x, y
-      move3 x, y
+      @left, @top = x, y
     end
 
     def change &blk

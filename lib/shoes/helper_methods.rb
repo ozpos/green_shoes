@@ -10,6 +10,14 @@ class Shoes
       @margin_bottom ||= margin_bottom
     end
 
+    def set_minimum_width ele, min_width
+      parent = ele.parent
+      if parent.is_a?(Slot)
+        parent.initials[:min_width] = min_width if parent.initials[:min_width] < min_width
+        set_minimum_width parent, min_width + parent.margin_left + parent.margin_right
+      end
+    end
+
     def click &blk
       @click_proc = blk
       @app.mccs << self
@@ -159,30 +167,48 @@ class Shoes
     end
   end
 
-  def self.contents_alignment slot
+  def self.contents_alignment(slot)
     x, y = slot.left.to_i + slot.margin_left, slot.top.to_i + slot.margin_top
     max = Struct.new(:top, :height).new
     max.top, max.height = y, 0
     slot_height, slot_top = 0, y
 
     slot.contents.each do |ele|
-      next if ele.is_a?(Basic) && ele.cleared && !ele.is_a?(Pattern)
-      if ele.is_a? ShapeBase
-        ele.hide if slot.masked
-        next
-      end
-      if slot.masked and ele.is_a? Image
-        ele.hide
-        next
-      end
+      next if ele.is_a?(Border) or ele.is_a?(Background)
+#      next if ele.is_a?(Basic) && ele.cleared && !ele.is_a?(Pattern)
+#      if ele.is_a? ShapeBase
+#        ele.hide if slot.masked
+#        next
+#      end
+#      if slot.masked and ele.is_a? Image
+#        ele.hide
+#        next
+#      end
       tmp = max
-      max, flag = ele.positioning x, y, max
+      max = ele.positioning x, y, max
       x, y = ele.left + ele.width, ele.top + ele.height
       unless max == tmp
         slot_height = max.top + max.height - slot_top
       end
     end
-    slot_height + slot.margin_top + slot.margin_bottom
+    slot_height + slot.margin_bottom + slot.margin_top
+  end
+
+  def self.contents_realignment(slot, x)
+    offset = top = nil
+    slot.contents.reverse.each_with_index do |ele, i|
+      next if ele.is_a?(Border) or ele.is_a?(Background)
+      contents_realignment(ele, x + ele.left) if ele.is_a?(Slot)
+      if slot.align == "right"
+        offset = (slot.left + slot.width) - (ele.left + ele.width) if top != ele.top
+        ele.left += (offset) - slot.margin_right
+        top = ele.top
+      elsif slot.align == "center"
+        offset = ((slot.left + slot.width) - (ele.left + ele.width))/2 if top != ele.top
+        ele.left += (offset) - (slot.margin_right/2)
+        top = ele.top
+      end
+    end
   end
 
   def self.repaint_all slot
@@ -217,7 +243,8 @@ class Shoes
   def self.call_back_procs app
     init_contents app.cslot.contents
     app.cslot.width, app.cslot.height = app.width, app.height
-    scrollable_height = contents_alignment app.cslot
+    scrollable_height = contents_alignment(app.cslot)
+    contents_realignment(app.cslot, 0)
     repaint_all app.cslot
     mask_control app
     repaint_all_by_order app
@@ -232,8 +259,9 @@ class Shoes
     contents.each do |ele|
       next unless ele.is_a? Slot
       ele.initials.each do |k, v|
-        ele.send "#{k}=", v
+        ele.send "#{k}=", v unless k == :min_width
       end
+      init_contents ele.contents
     end
   end
 

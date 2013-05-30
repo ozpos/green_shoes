@@ -13,7 +13,7 @@ class Shoes
 
       set_margin
 
-      @radio_group = Gtk::RadioButton.new
+    #  @radio_group = Gtk::RadioButton.new
       @masked = @hovered = false
       @parent = @app.cslot
       @app.cslot = self
@@ -46,24 +46,19 @@ class Shoes
       blk ? @app.instance_eval(&blk) : @app
     end
 
-    def move3 x, y
-      @left, @top = x, y
-    end
-
     def positioning x, y, max
       w = (parent.width * @initials[:width]).to_i if @initials[:width].is_a? Float
       w = (parent.width + @initials[:width]) if @initials[:width] < 0
-      @width = w - (margin_left + margin_right) if w
-      if parent.is_a?(Flow) and x + @width <= parent.left + parent.width
-        move3 x + parent.margin_left, max.top + parent.margin_top
-        @height = Shoes.contents_alignment self
+      @width = w - (parent.margin_left + parent.margin_right) if w
+      @width = parent.initials[:min_width] if @width < parent.initials[:min_width]
+      if parent.is_a?(Flow) and x + @width <= parent.left + parent.width - parent.margin_left - parent.margin_right
+        @left, @top = x, max.top
+        @height = Shoes.contents_alignment(self)
         max = self if max.height < @height
-        flag = true
       else
-        move3 parent.left + parent.margin_left, max.top + max.height + parent.margin_top
-        @height = Shoes.contents_alignment self
+        @left, @top = parent.left + parent.margin_left, max.top + max.height
+        @height = Shoes.contents_alignment(self)
         max = self
-        flag = false
       end
       case @initials[:height]
       when 0
@@ -72,12 +67,9 @@ class Shoes
       else
         max.height = @height = @initials[:height]
       end
-      contents.each &:fix_size
-      return max, flag
+      max
     end
 
-    def fix_size; end
-    
     def clear all = false, &blk
       all ? @contents.each(&:clear_all) : @contents.each(&:clear)
       @contents.each{|e| @app.mlcs.delete e; @app.mhcs.delete e}
