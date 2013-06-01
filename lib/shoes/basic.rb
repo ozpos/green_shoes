@@ -21,11 +21,11 @@ class Shoes
         attr_accessor *args.keys
       end
 
-      (@width, @height) = @real.size_request if @real and !self.is_a?(TextBlock)
+      (@width, @height) = @real.size_request if @real and !self.is_a?(TextBlock) and !self.is_a?(Progress)
 
       set_margin
       @width += (@margin_left + @margin_right)
-      set_minimum_width(self, @width)# + parent.margin_left + parent.margin_right)
+      set_minimum_width(self, @width) unless self.is_a?(TextBlock)# + parent.margin_left + parent.margin_right)
       @height += (@margin_top + @margin_bottom)
 
       @proc = nil
@@ -122,7 +122,7 @@ class Shoes
     end
 
     def fits_without_wrapping?(element, parent, x)
-      x + element.width <= parent.left + parent.width - parent.margin_right
+      x + element.width <= parent.left + parent.width - parent.margin_left - parent.margin_right
     end
 
     def bounds

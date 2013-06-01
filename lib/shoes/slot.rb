@@ -47,11 +47,11 @@ class Shoes
     end
 
     def positioning x, y, max
-      w = (parent.width * @initials[:width]).to_i if @initials[:width].is_a? Float
-      w = (parent.width + @initials[:width]) if @initials[:width] < 0
-      @width = w - (parent.margin_left + parent.margin_right) if w
+      w = ((parent.width - parent.margin_left - parent.margin_right) * @initials[:width]).to_i if @initials[:width].is_a? Float
+      w = (parent.width  - parent.margin_left - parent.margin_right + @initials[:width]) if @initials[:width] < 0
+      @width = w if w
       @width = parent.initials[:min_width] if @width < parent.initials[:min_width]
-      if parent.is_a?(Flow) and x + @width <= parent.left + parent.width - parent.margin_left - parent.margin_right
+      if parent.is_a?(Flow) and x + @width <= parent.left + parent.width - parent.margin_right# - parent.margin_right)
         @left, @top = x, max.top
         @height = Shoes.contents_alignment(self)
         max = self if max.height < @height

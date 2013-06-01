@@ -1,21 +1,68 @@
-Shoes.app margin: 0, align: "left", width: 860, height: 600, resizable: true, title: "f1m50[f2m0]" do
-#line 50, 50, 320, 50
-  flow margin: 0 do
-  flow margin: 0, width: 0.333, align: "center" do
-    button "B1 f1", margin: 0
-    button "B2 f1", margin: 0
-    button "B3 f1", margin: 0
-  end
-  flow margin: 0, width: 0.333, align: "center" do
-    button "B1 f2", margin: 0
-    button "B2 f2", margin: 0
-    button "B3 f2", margin: 0
-  end
-  flow margin: 0, width: 0.333, align: "center" do
-    button "B1 f3", margin: 0
-    button "B2 f3", margin: 0
-    button "B3 f3", margin: 0
-  end
-  end
+Shoes.app margin: 0, align: "left", width: 600, height: 200, resizable: true, title: "f0 600 x 200, f1m10, f2,f3,f4=33% b1-9mt10mb10" do
 
-end
+  #stack margin:10, align:"right" do
+  #  button "Button"
+  #  edit_line width:200#, align:"right"
+  #  list_box :items => ["Apples","Oranges","Pears"]
+    edit_box
+  #  oval radius:20
+  #  #Problems
+  @p = progress width: 300   # Cannot set width.
+  #  #animate do |i|
+  #  #  @p.fraction = (i % 100)/100.0
+  #  #end
+  title "Title"                    # Upsets flow resizing
+  para "Choose a fruit:"           # Upsets flow resizing
+  banner "Banner", align:"center"  # Upsets flow resizing
+  flow margin: 0 do
+  #border black
+  background pink
+  #button "Button"
+  #button "Button"
+  flow margin:0, width: 0.3333, align: "left" do
+    border blue
+    button "B1 f1", margin_top: 10, margin_bottom: 10
+    button "B2 f1", margin_top: 10, margin_bottom: 10
+    button "B3 f1", margin_top: 10, margin_bottom: 10
+  end
+  flow margin:0, width: 0.3333, align: "left" do
+    border blue
+    button "B1 f1", margin_top: 10, margin_bottom: 10
+    button "B2 f1", margin_top: 10, margin_bottom: 10
+    button "B3 f1", margin_top: 10, margin_bottom: 10
+  end
+  flow margin:0, width: 0.3333, align: "left" do
+    border blue
+    button "B1 f1", margin_top: 10, margin_bottom: 10
+    button "B2 f1", margin_top: 10, margin_bottom: 10
+    button "B3 f1", margin_top: 10, margin_bottom: 10
+    edit_box
+  end
+  end
+  end
+  #end
+#  end
+#    flow margin: 10, align: "left" do
+  #background "#eeff22"
+ #   button "Banner", align: "left"
+ # end
+#  flow margin: 0, align: "left" do
+#    background red
+#  flow margin: 0, width: 0.333, align: "left" do
+#       #background yellow
+#    button "B1 f1", margin_top: 10, margin_bottom: 10
+#    button "B2 f1", margin_top: 10, margin_bottom: 10
+#    button "B3 f1", margin_top: 10, margin_bottom: 10
+#  end
+#  flow margin: 0, width: 0.333, align: "left" do
+#    button "B1 f2", margin_top: 10, margin_bottom: 10
+#    button "B2 f2", margin_top: 10, margin_bottom: 10
+#    button "B3 f2", margin_top: 10, margin_bottom: 10
+#  end
+#  flow margin: 0, width: 0.333, align: "left" do
+#    button "B1 f3", margin_top: 10, margin_bottom: 10
+#    button "B2 f3", margin_top: 10, margin_bottom: 10
+#    button "B3 f3", margin_top: 10, margin_bottom: 10
+#  end
+#  end
+#end

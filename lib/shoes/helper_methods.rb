@@ -11,8 +11,9 @@ class Shoes
     end
 
     def set_minimum_width ele, min_width
+      return if self.is_a? Background or self.is_a? Border
       parent = ele.parent
-      if parent.is_a?(Slot)
+      if parent.is_a?(Flow)
         parent.initials[:min_width] = min_width if parent.initials[:min_width] < min_width
         set_minimum_width parent, min_width + parent.margin_left + parent.margin_right
       end
@@ -174,7 +175,10 @@ class Shoes
     slot_height, slot_top = 0, y
 
     slot.contents.each do |ele|
-      next if ele.is_a?(Border) or ele.is_a?(Background)
+      if ele.is_a?(Background) or ele.is_a?(Border)
+        next
+      end
+
 #      next if ele.is_a?(Basic) && ele.cleared && !ele.is_a?(Pattern)
 #      if ele.is_a? ShapeBase
 #        ele.hide if slot.masked
@@ -196,8 +200,8 @@ class Shoes
 
   def self.contents_realignment(slot, x)
     offset = top = nil
-    slot.contents.reverse.each_with_index do |ele, i|
-      next if ele.is_a?(Border) or ele.is_a?(Background)
+    slot.contents.reverse.each do |ele|
+      next if ele.is_a?(Border) or ele.is_a?(Background) or ele.is_a?(TextBlock)
       contents_realignment(ele, x + ele.left) if ele.is_a?(Slot)
       if slot.align == "right"
         offset = (slot.left + slot.width) - (ele.left + ele.width) if top != ele.top
@@ -243,6 +247,7 @@ class Shoes
   def self.call_back_procs app
     init_contents app.cslot.contents
     app.cslot.width, app.cslot.height = app.width, app.height
+    #max = app.cslot.positioning 0, 0, Struct.new(:top, :height).new(0,0)
     scrollable_height = contents_alignment(app.cslot)
     contents_realignment(app.cslot, 0)
     repaint_all app.cslot
