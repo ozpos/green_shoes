@@ -22,7 +22,7 @@ module Shoes
   ROTATE = [Gdk::Pixbuf::ROTATE_NONE, Gdk::Pixbuf::ROTATE_CLOCKWISE, Gdk::Pixbuf::ROTATE_UPSIDEDOWN, Gdk::Pixbuf::ROTATE_COUNTERCLOCKWISE]
   VERSION = IO.read(File.join(DIR, '../VERSION')).chomp
   BASIC_ATTRIBUTES_DEFAULT = {left: 0, top: 0, width: 0, height: 0, angle: 0, curve: 0}
-  SLOT_ATTRIBUTES_DEFAULT = {left: nil, top: nil, width: 1.0, height: 0, min_width: 1}
+  SLOT_ATTRIBUTES_DEFAULT = {left: nil, top: nil, width: 1.0, height: 0, min_width: nil}
   KEY_NAMES = %w[exclam quotedbl numbersign dollar percent ampersand apostrophe 
     parenleft parenright minus asciicircum backslash equal asciitilde bar grave at braceleft 
     bracketleft braceright bracketright plus asterisk semicolon colon less greater question 

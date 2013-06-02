@@ -39,6 +39,13 @@ task :abclauncher do
   system "bin/#{cmd} #{samples_dir}/abclauncher.rb"
 end
 
+desc "Run abclayout"
+task :abclayout do
+  samples_dir = "samples"
+  cmd = RbConfig::CONFIG["host_os"] =~ /mswin/ ? 'swt-shoooes' : 'gshoes'
+  system "bin/#{cmd} #{samples_dir}/abclayout.rb"
+end
+
 desc "Run abctest"
 task :abctest do
   samples_dir = "samples"

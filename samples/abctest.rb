@@ -1,13 +1,20 @@
-Shoes.app margin: 0, align: "left", width: 600, height: 200, resizable: true, title: "f0 600 x 200, f1m10, f2,f3,f4=33% b1-9mt10mb10" do
+Shoes.app margin: 0, align: "right", width: 600, height: 200, resizable: true, title: "f0 600 x 200, f1m10, f2,f3,f4=33% b1-9mt10mb10" do
+  edit_box width:0.25
+  para "Search", width: 0.25
 
-  #stack margin:10, align:"right" do
+  stack margin:10, align:"right" do
   #  button "Button"
-  #  edit_line width:200#, align:"right"
+  flow width: 0.25,align: "right" do
+    para "Search"
+    edit_line
+  end
   #  list_box :items => ["Apples","Oranges","Pears"]
+  para "Search"
+  edit_line
     edit_box
   #  oval radius:20
   #  #Problems
-  @p = progress width: 300   # Cannot set width.
+  #@p = progress width: 300   # Cannot set width.
   #  #animate do |i|
   #  #  @p.fraction = (i % 100)/100.0
   #  #end
@@ -19,7 +26,7 @@ Shoes.app margin: 0, align: "left", width: 600, height: 200, resizable: true, ti
   background pink
   #button "Button"
   #button "Button"
-  flow margin:0, width: 0.3333, align: "left" do
+  flow margin:0, width: 0.3333, align: "right" do
     border blue
     button "B1 f1", margin_top: 10, margin_bottom: 10
     button "B2 f1", margin_top: 10, margin_bottom: 10
@@ -40,7 +47,7 @@ Shoes.app margin: 0, align: "left", width: 600, height: 200, resizable: true, ti
   end
   end
   end
-  #end
+  end
 #  end
 #    flow margin: 10, align: "left" do
   #background "#eeff22"
