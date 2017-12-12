@@ -42,7 +42,7 @@ module Gtk
 		@popup_tray.show_all
 		
 		super()
-		self.pixbuf=if file then  Gdk::Pixbuf.new(file) ;else nil ; end
+		self.pixbuf=if file then  GdkPixbuf::Pixbuf.new(:file => file) ;else nil ; end
 		self.tooltip=title||""
 		self.signal_connect('activate'){ window.visible? ? window.hide : window.show }
 		self.signal_connect('popup-menu'){|tray, button, time|

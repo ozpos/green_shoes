@@ -5,7 +5,7 @@ class Shoes
       projector.controller = SwingController.new
       projector.controller.content = TextureMappingData.new
       projector.controller.content.face_list = AkatsukiFace::create
-      projector.controller.content.texture = Gdk::Pixbuf.new(file)
+      projector.controller.content.texture = GdkPixbuf::Pixbuf.new(:file => file)
   
       def (projector.controller.content.texture).source_set(context)
         context.set_source_pixbuf(self)
