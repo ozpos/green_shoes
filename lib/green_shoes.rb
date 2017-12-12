@@ -19,7 +19,7 @@ module Shoes
   LINKHOVER_DEFAULT = "<span underline='single' underline_color='#039' foreground='#039' weight='normal'>"
   BANNER_DEFAULT, TITLE_DEFAULT, SUBTITLE_DEFAULT, TAGLINE_DEFAULT, CAPTION_DEFAULT, PARA_DEFAULT, INSCRIPTION_DEFAULT, IMAGE_DEFAULT = 
     {}, {}, {}, {}, {}, {}, {}, {}
-  ROTATE = [Gdk::Pixbuf::ROTATE_NONE, Gdk::Pixbuf::ROTATE_CLOCKWISE, Gdk::Pixbuf::ROTATE_UPSIDEDOWN, Gdk::Pixbuf::ROTATE_COUNTERCLOCKWISE]
+  ROTATE = [GdkPixbuf::PixbufRotation::NONE, GdkPixbuf::PixbufRotation::CLOCKWISE, GdkPixbuf::PixbufRotation::UPSIDEDOWN, GdkPixbuf::PixbufRotation::COUNTERCLOCKWISE]
   VERSION = IO.read(File.join(DIR, '../VERSION')).chomp
   BASIC_ATTRIBUTES_DEFAULT = {left: 0, top: 0, width: 0, height: 0, angle: 0, curve: 0}
   SLOT_ATTRIBUTES_DEFAULT = {left: nil, top: nil, width: 1.0, height: 0}
@@ -30,7 +30,7 @@ module Shoes
   LINECAP = {curve: Cairo::LineCap::ROUND, rect: Cairo::LineCap::BUTT, project: Cairo::LineCap::SQUARE}
   SPAN_FORM = {emphasis: :style, family: :font_family, weight: :weight, rise: :rise, 
     strikethrough: :strikethrough, strikecolor: :strikethrough_color, underline: :underline, undercolor: :underline_color}
-  WRAP = {word: Pango::WRAP_WORD, char: Pango::WRAP_CHAR, trim: Pango::ELLIPSIZE_END}
+  WRAP = {word: Pango::WrapMode::WORD, char: Pango::WrapMode::CHAR, trim: Pango::EllipsizeMode::END}
   FONT_SIZE = {"xx-small" => 0.57, "x-small" => 0.64, "small" => 0.83, "medium" => 1.0, "large" => 1.2, "x-large" => 1.43, "xx-large" => 1.73}
   COLORS = {}
 end

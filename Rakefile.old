@@ -10,14 +10,15 @@ rescue LoadError
 end
 
 Jeweler::Tasks.new do |gem|
-  gem.name = "green_shoes"
+  gem.name = "green_shoes", '~> 0'
   gem.summary = %Q{Green Shoes}
   gem.description = %Q{Green Shoes is one of colorful Shoes, written in pure Ruby with Ruby/GTK2.}
   gem.email = "ashbbb@gmail.com"
   gem.executables = ["gshoes"]
-  gem.homepage = "http://github.com/ashbb/green_shoes"
+  gem.homepage = "https://github.com/ozpos/green_shoes"
   gem.authors = ["ashbb"]
-  gem.add_dependency 'gtk2'
+  gem.add_dependency 'gtk2', '~> 3.0', '>= 3.0.7'
+  gem.add_dependency 'jeweler', '~> 2.0', '>= 2.0.1'
   gem.files = %w[bin lib static samples snapshots].map{|dir| FileList[dir + '/**/*']}.flatten << 'VERSION'
 end
 
