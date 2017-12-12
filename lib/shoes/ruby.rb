@@ -11,6 +11,7 @@ module GLib
   module_function
   def exit_application(exception, status)
     raise exception if exception.class.name == "SystemExit"
+    alert exception
     super(exception, status)
   end
 end
@@ -39,16 +40,15 @@ class Object
   def confirm msg
     $dde = true
     dialog = Gtk::MessageDialog.new(
-      "Green Shoes asks:", 
       get_win,
-      Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
-      [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT],
-      [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT]
+      Gtk::Dialog::MODAL,
+      Gtk::MessageDialog::QUESTION,
+      Gtk::MessageDialog::BUTTONS_OK_CANCEL,
     )
     dialog.vbox.add Gtk::Label.new msg
-    dialog.set_size_request 300, 100
+    dialog.set_size_request 280, 160
     dialog.show_all
-    ret = dialog.run == Gtk::Dialog::RESPONSE_ACCEPT ? true : false
+    ret = dialog.run == Gtk::Dialog::RESPONSE_OK ? true  : false
     dialog.destroy
     ret
   end
@@ -56,18 +56,18 @@ class Object
   def ask msg, args={}
     $dde = true
     dialog = Gtk::MessageDialog.new(
-      "Green Shoes asks:", 
-      get_win,
-      Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
-      [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT],
-      [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT]
+        get_win,
+        Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
+        Gtk::MessageDialog::QUESTION,
+        Gtk::MessageDialog::BUTTONS_OK_CANCEL,
+        msg.to_s
     )
     dialog.vbox.add Gtk::Label.new msg
     dialog.vbox.add(el = Gtk::Entry.new)
     el.visibility = false if args[:secret]
-    dialog.set_size_request 300, 100
+    dialog.set_size_request 280, 160
     dialog.show_all
-    ret = dialog.run == Gtk::Dialog::RESPONSE_ACCEPT ? el.text : nil
+    ret = dialog.run == Gtk::Dialog::RESPONSE_OK ? el.text : nil
     dialog.destroy
     ret
   end
@@ -107,7 +107,8 @@ class Object
   def ask_color title = 'Pick a color...'
     $dde = true
     dialog = Gtk::ColorSelectionDialog.new title
-    dialog.icon = Gdk::Pixbuf.new File.join(DIR, '../static/gshoes-icon.png')
+    file =     File.join(DIR, '../static/gshoes-icon.png')
+    dialog.icon = GdkPixbuf::Pixbuf.new(:file => file)
     dialog.run
     ret = dialog.colorsel.current_color.to_a.map{|c| c / 65535.0}
     dialog.destroy
@@ -120,7 +121,8 @@ class Object
 
   def get_win
     Gtk::Window.new.tap do |s|
-      s.icon = Gdk::Pixbuf.new File.join(DIR, '../static/gshoes-icon.png')
+      file = File.join(DIR, '../static/gshoes-icon.png')
+      s.icon = GdkPixbuf::Pixbuf.new(:file => file)
     end
   end
 end
