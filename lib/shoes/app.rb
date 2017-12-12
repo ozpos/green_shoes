@@ -211,7 +211,7 @@ class Shoes
       args = basic_attributes args
       (click_proc = args[:click]; args.delete :click) if args[:click]
       b = Gtk::Button.new name
-      b.set_size_request args[:width], args[:height] if args[:width] > 0 and args[:height] > 0
+      (b.set_size_request args[:width], args[:height] > 0 ? args[:height] : 27) if args[:width] > 0
       @canvas.put b, args[:left], args[:top]
       b.show_now
       args[:real], args[:text], args[:app] = b, name, self
@@ -269,7 +269,26 @@ class Shoes
       el = Gtk::Entry.new
       el.visibility = false if args[:secret]
       el.text = txt || args[:text].to_s
-      el.set_size_request args[:width], args[:height]
+      case args[:align].downcase
+        when 'left'
+          el.xalign = 0
+        when 'right'
+          el.xalign = 1
+        when 'center'
+          el.xalign = 0.5
+        else
+          el.xalign = 0
+      end
+      # Calculate width
+      if args[:width] < 0 then
+        el.width_chars = args[:width].abs   #.to_s.size #args[:max].count
+        el.max_length = args[:width].abs  #.to_s.size #args[:max].count
+        el.set_size_request -2, args[:height]
+      else
+        el.set_size_request args[:width], args[:height]
+      end
+
+      #x=el.get_entry_layout
       @canvas.put el, args[:left], args[:top]
       el.show_now
       args[:real], args[:app] = el, self
